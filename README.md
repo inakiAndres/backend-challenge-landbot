@@ -26,4 +26,4 @@ Pricing  | Email
 - Be easy to grow with new functionality.
 - Be a dockerized app.
 
-## [Run it file](runit.md)
+## [Run it file](RUNIT.md)
