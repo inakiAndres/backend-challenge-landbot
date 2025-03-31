@@ -4,7 +4,7 @@ from rest_framework import status
 class TestAPIEndpoints(APITestCase):
 
     def test_send_notification_success(self):
-        """Test sending a valid slack notification"""
+        """Test sending a valid topic and description"""
         payload = {
             "topic": "Sales",
             "description": "Hi, I need help with a sales problem"
@@ -13,6 +13,8 @@ class TestAPIEndpoints(APITestCase):
         response = self.client.post('/api/notifications', data=payload, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
+        self.assertIn("message", response.data)
+        self.assertIn("request_id", response.data)
 
     def test_send_notification_missing_params(self):
         """Test sending a request with missing parameters"""

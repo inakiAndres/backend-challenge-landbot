@@ -184,4 +184,5 @@ fabric.properties
 .env
 .venv
 __pycache__
+.coverage
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,pycharm,visualstudiocode

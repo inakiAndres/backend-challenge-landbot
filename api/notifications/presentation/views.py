@@ -1,9 +1,9 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from ...utils.normalization import normalize_keys 
-from .serializers import NotificationSerializer
-from ..application.use_cases import SendNotificationUseCase
+from api.utils.normalization import normalize_keys 
+from api.notifications.presentation.serializers import NotificationSerializer
+from api.notifications.application.use_cases.send_notification import SendNotificationUseCase
 
 
 @api_view(['POST'])
@@ -19,8 +19,7 @@ def post_notifications(request):
         
         use_case = SendNotificationUseCase()
         try:
-            notification_id = use_case.execute(topic, description)
-            data = {"request_id": notification_id}
+            data = use_case.execute(topic, description)
             return Response(data, status=status.HTTP_202_ACCEPTED)
         except ValueError as e:
             return Response({"error": str(e)}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
